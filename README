@@ -1,0 +1,38 @@
+General Migration Network Code
+Writen by Joanna Bieri (joanna_bieri@redlands.edu)
+
+This code is based on the general network framework as described in the paper:
+
+A general modeling framework for describing spatio-temporal population dynamics
+
+Christine Sample* , John Fryxell, Joanna Bieri, Paula Federico, Julia Earl, Ruscena Wiederholt, Tyler Flockhart, Sam Nicol, Jay E. Diffendorfer, Brady J. Mattsson, Wayne E. Thogmartin, Richard A. Erickson, and D. Ryan Norris.
+
+Version 1.1 of the code as of 12/15/2016
+
+Requires the following R libraries:
+library(rJava)
+library(XLConnect)
+library(lattice)
+library(R.matlab)
+library(xtable)
+library(data.table)
+
+NetworkSetup.R - Reads in the Network Parameters which are stored in .xlsx files. This code depends on the format of the .xlsx files. The formats must be followed carefully in order for this to work.
+
+NetworkSimulation.R - Executes the general network model as described in the paper. Depends on:
+*** NetworkSetup.R (reading of parameters in the .xlsx files) 
+*** SpeciesFunctions.R (correct definition of f_(i,t), p_(ij,t) and s_(ij,t))
+*** Original parameters as set up in the SpeciesSimulation.R file.
+
+NetworkOutputs.R - Gives a simple graphical and numerical output of the simulation results.
+
+
+* To run the network model for your species,
+  - define species-specific parameters in the input file(s):  ./SIMNAME/network_inputs_NETNAME.xlsx
+  - define species-specific functions f_(i,t), p_(ij,t) and s_(ij,t) in SpeciesFunctions.R
+  - define species-specific data (SIMNAME, NETNAME, seasons, and num_nodes) in SpeciesSimulation.R
+  - run SpeciesSimulation.R
+
+
+
+
