@@ -1,7 +1,5 @@
 General Migration Network Code
-Writen by Joanna Bieri (joanna_bieri@redlands.edu)
-https://zenodo.org/badge/latestdoi/76580356
-
+Writen by Joanna Bieri (joanna_bieri@redlands.edu) and Christine Sample
 
 This code is based on the general network framework as described in the paper:
 
@@ -9,15 +7,14 @@ A general modeling framework for describing spatio-temporal population dynamics
 
 Christine Sample* , John Fryxell, Joanna Bieri, Paula Federico, Julia Earl, Ruscena Wiederholt, Tyler Flockhart, Sam Nicol, Jay E. Diffendorfer, Brady J. Mattsson, Wayne E. Thogmartin, Richard A. Erickson, and D. Ryan Norris.
 
-Version 1.1 of the code as of 12/15/2016
+Version 1.1 of the code as of 8/3/17
 
 Requires the following R libraries:
-library(rJava)
 library(XLConnect)
-library(lattice)
-library(R.matlab)
-library(xtable)
-library(data.table)
+** Updated to remove error on Macs that causes outputs to fail
+** Updated tutorial - see tutorial for more information on running the code.
+
+
 
 NetworkSetup.R - Reads in the Network Parameters which are stored in .xlsx files. This code depends on the format of the .xlsx files. The formats must be followed carefully in order for this to work.
 

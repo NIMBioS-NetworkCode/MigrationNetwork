@@ -5,13 +5,7 @@
 ## It then calls NetworkSetup.R to set up the network 
 ## and calls NetworkSimulation.R to run simulations until an equilibrium population is reached.
 ## Finally, it calls NetworkOutputs.R to display some basic results.
-
-library(rJava)
 library(XLConnect)
-library(lattice)
-library(R.matlab)
-library(xtable)
-library(data.table)
 
 
 ### USERS MUST CHANGE THIS PART OF THE CODE TO SET UP SPECIES-SPECIFIC NETWORK INFO ###

@@ -22,12 +22,6 @@ f_function <- function() {
   Survi <- alpha[[type]][[ind]]$S*N[[t]][[type]]
   Trans <- 0*N[[t]][[type]]
   
-  # print("Pre")
-  # print(paste("t=",t,"type=",type))
-  # print(Repro)
-  # print(Survi)
-  # print(Trans)
-  
   
   # Breeding Nodes
   if(ind==1){

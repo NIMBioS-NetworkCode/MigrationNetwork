@@ -8,6 +8,8 @@
 ## 3. A single season graph of the steady state total network populations for each season at steady state.
 
 ## USERS SHOULD NOT NEED TO INTERACT WITH THIS CODE
+options(digits=4)
+options(scipen=999)
 
 #### Plot total populations over time  ####
 platform <- .Platform$OS.type
@@ -46,25 +48,49 @@ rm(i)
 
 legend('right', NETNAME , lty=1, pch=dottype, bty='n', cex=.75)
 
-savePlot(paste(SIMNAME,"/TotalPop_vs_TIME.jpeg",sep=""),type="jpeg")
-
 
 #### Store data as .csv for steady state annual cycle population numbers  ####  
 pop_output <- data.frame(matrix(0,seasons,NUMNET))
 for(i in 1:NUMNET){
   temp <- unlist(lapply(total_pop, function(x) x[][[i]]))
   pop_output[,i] <- data.frame(temp[seq(timestep-seasons+1,timestep, by=1)],row.names=NULL) 
-  
 }
 rm(i)
 
 colnames(pop_output) <- NETNAME
 for(i in 1:seasons){
-  rownames(pop_output)[i] <- paste("season",i)}
+  rownames(pop_output)[i] <- paste("season",i)
+  }
+
+
 print("Total Equilibrium Population - for each season")
 print(pop_output)
-write.csv(pop_output,file=paste(SIMNAME,"/SteadyStatePopulation.csv",sep=""))
 rm(i)
+
+
+pop_dist <- matrix(0,num_nodes,seasons)
+for(i in 1:seasons){
+  node_pop <- rowSums(matrix(unlist(N[[timestep-(seasons-i+1)]]), nrow=num_nodes))
+  pop_dist[,i] <- node_pop/sum(node_pop)
+}
+colnames(pop_dist) <- rownames(pop_output)
+rownames(pop_dist) <- colnames(M[[1]][[1]])
+cat("\n\n Node Equilibrium Population Distribution - for each season\n")
+print(pop_dist)
+
+
+
+path_dist <- list()
+for(i in 1:seasons){
+  path_pop <- matrix(0,num_nodes,num_nodes)
+  for(j in 1:NUMNET){
+  path_pop <- path_pop + M[[timestep-(seasons-i+1)]][[j]]
+  }
+  path_dist[[i]] <- path_pop/sum(rowSums(path_pop))
+  rownames(path_dist[[i]]) <- colnames(path_dist[[i]])
+}
+cat("\n\n Path Equilibrium Population Distrubition - for each season\n")
+print(path_dist)
 
 
 #### Plot steady state annual cycle population numbers ####
@@ -96,7 +122,31 @@ for(i in 1:NUMNET){
 rm(i)
 legend('right', NETNAME , lty=1, pch=dottype, bty='n', cex=.75)
 
-savePlot(paste(SIMNAME,"/Pop_annualCycle.jpeg",sep=""),type="jpeg")
+
+#write.table(pop_output,file=paste(SIMNAME,"/SteadyStatePopulation.csv", sep=""), col.names=FALSE)
+
+sink(file=paste(SIMNAME,"/SteadyStatePopulation.csv", sep=""))
+cat('Equilibrium Population')
+write.csv(pop_output)
+cat('___________________________')
+cat("\n")
+cat("\n")
+
+cat('Equilibrium Population Distribution at Nodes')
+write.csv(pop_dist)
+cat('___________________________')
+cat("\n")
+cat("\n")
+
+for(i in 1:seasons){
+cat('Equilibrium Population Distribution along Paths:   Season', i)
+write.csv(path_dist[[i]])
+cat('___________________________') 
+cat("\n")
+cat("\n")
+}
+
+sink()
 
 # Clear the workspace reserving needed network input variables and base variables and simulation variables
 output_variables <- c("pop_output", "output_variables")

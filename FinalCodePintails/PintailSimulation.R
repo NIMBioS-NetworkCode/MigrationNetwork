@@ -1,12 +1,7 @@
 ##################
 ## NETWORK CODE ##
 ##################
-library(rJava)
 library(XLConnect)
-library(lattice)
-library(R.matlab)
-library(xtable)
-library(data.table)
 
 #########################################
 ### SET SPECEIS SPECIFIC NETWORK INFO ###
@@ -16,7 +11,7 @@ library(data.table)
 
 # IMPORTANT NOTE #
 # Users should specify network model functions f_(i,t), p_(ij,t), and s_(ij,t) in the file:
-# NetworkFunctions.R, even if these are constants they must still be set as such.
+#           NetworkFunctions.R, even if these are constants they must still be set as such.
 
 ### User specified information specific to the simulation ###
 
@@ -34,13 +29,13 @@ ERR <- .01 # Error tolerance for convergence.
 
 seasons <- 3 # Number of seasons or steps in one annul cycle. 
 # This must match number of spreadsheets in input files
+
 num_nodes <- 5 # Number of nodes in the network
 # This must match the number of initial conditions given in input files
 
 tmax <- 301 # Maximum number of steps to take - assume non convergence if t=tmax
 
 OUTPUTS <- TRUE # TRUE = Process final outputs, FALSE = Do not process just run the sumulation.
-
 
 ## For debugging your model equations ##
 SILENT <- TRUE # TRUE = Do not print data to console - silence outputs.

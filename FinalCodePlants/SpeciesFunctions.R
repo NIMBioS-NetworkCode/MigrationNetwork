@@ -37,17 +37,8 @@ f_function <- function() {
   
   # PLANT UPDATE - type=2 implies plants
   if( type==2){
-    # seed_trans <- t_node*seed_survival*seed_pop #Total number of transitioning seeds
-    # Psi <- psi_node*exp(-(plant_pop+seed_trans)/K_node)  #Density dependent successful germination rate
-    # trans <- Psi*seed_trans #Total number of new plants
-    # repro <- 0 #No plants produced by reproduction
-    # survi <- plant_survival*plant_pop #Surviving plants
     
     seed_trans <- t_node*seed_survival*seed_pop #Total number of transitioning seeds
-    # for (i in 1:n){
-    #   if(K_node[i]==0) Psi[i] <- 0 else Psi[i] <- (0.0327*(1+exp(-1.0175)))/(1+exp(-1.0175+0.1972*eggs*POP[[1]][i]/mw_param[i]))
-    # }
-    # if(K_node==0){Psi <- 0} else{
     Psi <- psi_node*exp(-(plant_pop+seed_trans)/K_node) #Density dependent successful germination rate
     trans <- Psi*seed_trans #Total number of new plants
     repro <- 0 #No plants produced by reproduction

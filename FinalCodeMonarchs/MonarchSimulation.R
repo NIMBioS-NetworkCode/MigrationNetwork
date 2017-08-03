@@ -1,12 +1,7 @@
 ##################
 ## NETWORK CODE ##
 ##################
-library(rJava)
 library(XLConnect)
-library(lattice)
-library(R.matlab)
-library(xtable)
-library(data.table)
 
 
 #########################################

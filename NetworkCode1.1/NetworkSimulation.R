@@ -143,7 +143,7 @@ while (errorstop == 0){
     if(all(ERRPOP_OLD < ERR)){errorstop <- 1}
     if(t+1 >= tmax){
       errorstop <- 1 
-      print("\n The simulation did not converge within the maximum time allowed")}
+      cat("\n ************ \n\n The simulation did not converge within the maximum time allowed \n\n ************ \n")}
   }
 }
 
